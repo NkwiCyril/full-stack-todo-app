@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Golos+Text:wght@400..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Golos Text", sans-serif;
+}
+
+.flex-me {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+body {
+  background-color: #f8fafc;
+  height: 100vh;
+}
+
+form {
+  text-align: center;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.btn {
+  padding: 5px;
+  margin: 5px auto;
+}
+
+.start-container button:hover {
+  background-color: rgba(0, 0, 0, 0.824);
+  transition: all ease-in-out 0.2s;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+}
+
+input[type="text"], textarea {
+  padding: 5px 2px;
+  margin: 0 2px;
+  outline: none;
+  font-size: 16px;
+}
+
+.file-btn {
+  font-family: "Golos Text", sans-serif;
+  border: none;
+  background-color: #000;
+}
+
+/* ==================== */
+/* work on index.php */
+/* ==================== */
+
+
+.container {
+  width: 50%;
+  margin: 30px auto;
+  padding: 5px;
+}
+
+select, option {
+  padding: 7px;
+  margin: 0 2px;
+  font-size: 16px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+}
+
+option {
+  font-family: "Figtree", sans-serif;
+  font-size: 16px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 40
+}
+
+.add-button,
+.edit-button,
+.delete-button,
+.view-button {
+  width: fit-content;
+  cursor: pointer;
+  background-color: #fff;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  padding: 0px 3px;
+  margin: 5px 2px;
+  font-size: 20px;
+}
+
+.add-button {
+  background-color: #f8fafc;
+}
+
+#add {
+  font-size: 30px;
+}
+
+.add-button:hover {
+  color: #33a933;
+  transition: all ease-in-out .2s;
+}
+
+.edit-button:hover {
+  color: #0ea5e9;
+  transition: all ease-in-out .2s;
+
+}
+
+.delete-button:hover {
+  transition: all ease-in-out .2s;
+  color: #f43f5e;
+}
+
+.view-button:hover {
+  transition: all ease-in-out .2s;
+  color: #7f7f04;
+}
+
+/* ==================== */
+/* task display section */
+/* ==================== */
+
+.task-display {
+  display: flex;
+  flex-direction: column;
+}
+
+.status {
+  height: fit-content;
+  padding: 0px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.status:nth-child(2) {
+  padding-top: 3rem;
+
+}
+
+.status h3 {
+  display: flex;
+  align-items: center;
+}
+
+.status h3 span {
+  padding: 0px 5px;
+}
+
+hr {
+  margin: 7px;
+  width: 95%;
+  color: rgba(0, 0, 0, 0.276);
+}
+
+.task-card {
+  border-radius: 5px;
+  padding: 0px 0px;
+  margin-bottom: 5px;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  width: 95%;
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+}
+
+.image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.image {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.task-content {
+  margin-left: 10px;
+}
+
+.task-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+p {
+  padding: 5px 0;
+}
+
+.done-btn, .pending-btn,.not-started-btn {
+  border-radius: 50%;
+  padding: 3px;
+
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.current-status {
+  font-weight: bold;
+}
+
+.current-status,
+.description {
+  color: black;
+}
+
+.status-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btns-datetime {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.datetime {
+  font-size: 13px;
+  font-weight: 300;
+}
+
+.done h3,
+.in-progress h3,
+.to-do h3 {
+  border-radius: 20px;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 5px 10px;
+}
+
+.to-do h3, .not-started-btn {
+  background-color: #e3e2e0;
+  color: #464440;
+}
+
+.not-started-btn:hover {
+  transition: all ease-in-out .2s;
+  background-color: #f8eab1;
+  color: #d97706;
+}
+
+.in-progress h3, .pending-btn {
+  background-color: #d3e5ef;
+  color: #465f70;
+}
+
+.pending-btn:hover {
+  background-color: #0284c7;
+  color: #38bdf8;
+  transition: all ease-in-out .2s;
+}
+
+.done h3, .done-btn {
+  background-color: #dbeddb;
+  color: #324d3d;
+}
+
+.done-btn:hover {
+  background-color: #16a34a;
+  color: #4ade80;
+  transition: all ease-in-out .2s;
+
+}
+
+.to-do .task-card {
+  border-left: 5px solid #cbcbca;
+}
+
+.in-progress .task-card {
+  border-left: 5px solid #cae1ee;
+}
+
+.done .task-card {
+  border-left: 5px solid #cfeccf;
+}
+
+footer p {
+  font-size: smaller;
+}
+
+/* create.php */
+
+.btn {
+  border: none;
+  background-color: #16a34a;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #33a933;
+}
