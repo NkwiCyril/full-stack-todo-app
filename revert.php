@@ -1,9 +1,12 @@
 <?php
+
+include("partials/header.php");
+
 require 'database_conn.php';
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $sql_query = "UPDATE tasks SET status='todo' WHERE id=$id";
+    $sql_query = "UPDATE task SET status='todo' WHERE id=$id";
 
     try {
         $response = mysqli_query($conn, $sql_query);
@@ -11,8 +14,8 @@ if (isset($_GET["id"])) {
         header("Location: index.php");
 
     } catch (mysqli_sql_exception $e) {
-        echo "Unable to revert todo item at the moment: " . $e->getMessage() . "<br>";
-        echo "Try again later.";
+        echo "<b>Unable to revert todo item at the moment: " . $e->getMessage() . "<br>";
+        echo "Try again later.</b>";
     }
     $conn = null;
     exit;

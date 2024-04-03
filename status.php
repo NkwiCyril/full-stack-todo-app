@@ -1,4 +1,6 @@
 <?php
+include("partials/header.php");
+
 require 'database_conn.php';
 
 if (isset($_GET["id"])) {
@@ -10,8 +12,8 @@ if (isset($_GET["id"])) {
 
         header("Location: index.php");
     } catch (mysqli_sql_exception $e) {
-        echo "Unable to update todo item: " . $e->getMessage() . "<br>";
-        echo "Go back and try again.";
+        echo "<b>Unable to update todo item: " . $e->getMessage() . "<br>";
+        echo "Go back and try again.</b>";
     }
     $conn = null;
     exit;
