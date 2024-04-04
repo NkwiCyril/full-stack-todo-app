@@ -37,6 +37,11 @@ if (mysqli_num_rows($res) > 0) {
         <div class="task-content">
           <div class="status-buttons">
             <h1 class="task-title"><?php echo $row["title"] ?></h1>
+            <a href="status.php?id=<?php echo $row["id"] ?>">
+                <button class="edit-button" title="mark as done">
+                  <span class="material-symbols-outlined not-started-btn"> done </span>
+                </button>
+              </a>
           </div>
           <div class="task-space">
             <div class="description"><?php echo $row["description"] ?></div>
