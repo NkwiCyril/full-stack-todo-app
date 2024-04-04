@@ -25,7 +25,8 @@ $res = mysqli_query($conn, $sql_query);
       <?php
 if (mysqli_num_rows($res) > 0) {
     while ($row = mysqli_fetch_assoc($res)) {?>
-      <div class="task-card gray">
+    <a href="view.php?id=<?php echo $row["id"] ?>">
+    <div class="task-card gray">
         <div class="image">
           <img src="images/<?php echo $row["image_link"] ?>" alt="task-image">
         </div>
@@ -59,18 +60,12 @@ if (mysqli_num_rows($res) > 0) {
               </button>
             </a>
 
-            <a href="view.php?id=<?php echo $row["id"] ?>">
-              <button class="view-button" title="Delete task">
-                <span class="material-symbols-outlined"> visibility
-                </span>
-              </button>
-            </a>
-
             </div>
           </div>
         </div>
 
-      </div>
+      </div></a>
+      
       <?php }
 } else {
     echo "<em>All tasks  to be done will display here.</em>";
