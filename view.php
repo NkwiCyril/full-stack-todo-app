@@ -1,21 +1,29 @@
-<?php 
+<?php
 require 'database_conn.php';
-include("partials/header.php");
 ?>
-<aside class="status to-do">
-      <div class="flex-me">
-        <h3><span class="material-symbols-outlined"> list_alt </span>To Do</h3>
-        <a href="create.php"><button class="add-button">
-          <span class="material-symbols-outlined" id="add">
-            add_circle
-          </span>
-        </button></a>
-      </div>
-      <hr />
-      <?php
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/view.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Task Manager</title>
+</head>
+<body>
+
+<div class="container">
+  <header>
+
+  </header>
+  <section class="task-display">
+    <aside class="status to-do">
+
+<?php
+require 'database_conn.php';
 
 $id = $_GET["id"];
-
 $sql_query = "SELECT * FROM tasks WHERE id=$id";
 $res = mysqli_query($conn, $sql_query);
 ?>
@@ -29,13 +37,6 @@ if (mysqli_num_rows($res) > 0) {
         <div class="task-content">
           <div class="status-buttons">
             <h1 class="task-title"><?php echo $row["title"] ?></h1>
-
-            <a href="status.php?id=<?php echo $row["id"] ?>">
-            <button class="edit-button" title="mark as done">
-              <span class="material-symbols-outlined not-started-btn"> done </span>
-            </button>
-            </a>
-
           </div>
           <div class="task-space">
             <div class="description"><?php echo $row["description"] ?></div>
@@ -43,18 +44,16 @@ if (mysqli_num_rows($res) > 0) {
           <div class="btns-datetime">
             <p class="datetime"><?php echo $row["created_time"] ?></p>
             <div class="buttons">
-              <button class="edit-button" title="Edit task">
+
+						<a href="edit.php?id=<?php echo $row["id"] ?>">
+							<button class="edit-button" title="Edit task">
                 <span class="material-symbols-outlined"> border_color </span>
               </button>
+						</a>
+              
               <a href="delete.php?id=<?php echo $row["id"] ?>">
               <button class="delete-button" title="Delete task">
                 <span class="material-symbols-outlined"> delete </span>
-              </button>
-              </a>
-              <a href="view.php?id=<?php echo $row["id"] ?>">
-              <button class="view-button" title="Delete task">
-                <span class="material-symbols-outlined"> visibility
-                </span>
               </button>
               </a>
             </div>
@@ -66,7 +65,9 @@ if (mysqli_num_rows($res) > 0) {
 } else {
     echo "<em>All tasks  to be done will display here.</em>";
 }?>
-</aside>
-<?php 
-include("partials/footer.php");
+    </aside>
+    </section>
+</div>
+<?php
+include "partials/footer.php";
 ?>

@@ -3,9 +3,11 @@ include("partials/header.php");
 
 require 'database_conn.php';
 
+$date = date('Y-m-d h:i:s');
+
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $sql_query = "UPDATE tasks SET status='done' WHERE id=$id";
+    $sql_query = "UPDATE tasks SET status='done', done_time=CURRENT_TIMESTAMP WHERE id=$id";
 
     try {
         $response = mysqli_query($conn, $sql_query);

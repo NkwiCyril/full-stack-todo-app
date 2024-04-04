@@ -20,14 +20,12 @@ if (isset($_POST["add"])) {
         if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
             echo "<b>Only JPG, JPEG and PNG files are allowed.</b>";
         } else {
-          // generate unique image names for each image file
-          $new_image_name = uniqid("IMG-", true) .".". $imageFileType;
-          // path the image is to be uploaded to
-          $image_upload_path = $target_dir . $new_image_name;
-          // upload file
-          move_uploaded_file($_FILES["image-file"]["tmp_name"], $image_upload_path);
-
-          echo $image_upload_path;
+            // generate unique image names for each image file
+            $new_image_name = uniqid("IMG-", true) . "." . $imageFileType;
+            // path the image is to be uploaded to
+            $image_upload_path = $target_dir . $new_image_name;
+            // upload file
+            move_uploaded_file($_FILES["image-file"]["tmp_name"], $image_upload_path);
 
             // sql query to insert created task
             $query = "INSERT INTO tasks (title, description, status,image_link)
@@ -51,8 +49,8 @@ if (isset($_POST["add"])) {
 
 <section class="container">
   <div class="form">
+    <h1>Add Task</h1>
     <form enctype="multipart/form-data" action="create.php" method="POST">
-      <!-- <input type="hidden" name="MAX_FILE_SIZE" value="30000" /> -->
       Upload image: <input name="image-file" type="file" required />
       <label for="title">Title:</label>
       <input type="text" name="title" placeholder="Input task title" autocomplete="off" autofocus required/>
