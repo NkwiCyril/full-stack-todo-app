@@ -17,7 +17,6 @@ if(isset($_GET["id"])) {
         $task = mysqli_fetch_assoc($result);
         $title = $task["title"];
         $description = $task["description"];
-        $status = $task["status"];
     } else {
         echo "Task not found.";
         exit();
@@ -46,14 +45,14 @@ if (isset($_POST["edit"])) {
                 // Upload image file
                 if(move_uploaded_file($_FILES["image-file"]["tmp_name"], $image_upload_path)) {
                     // Update task with new image
-                    $query = "UPDATE tasks SET title='$title', description='$description', status='$status', image_link='$new_image_name' WHERE id=$id";
+                    $query = "UPDATE tasks SET title='$title', description='$description', image_link='$new_image_name' WHERE id=$id";
                 } else {
                     echo "<b>Failed to upload image.</b>";
                 }
             }
         } else {
             // Update task without changing image
-            $query = "UPDATE tasks SET title='$title', description='$description', status='$status' WHERE id=$id";
+            $query = "UPDATE tasks SET title='$title', description='$description' WHERE id=$id";
         }
 
         // Execute query to update task

@@ -342,3 +342,14 @@ footer p {
 .btn:hover {
   background-color: #33a933;
 }
+
+a.view-card {
+  text-decoration: none;
+  color: #000;
+}
+
+a.view-card:hover {
+  text-decoration: underline;
+  color: #464440;
+}
+
