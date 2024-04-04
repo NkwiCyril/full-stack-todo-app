@@ -1,5 +1,11 @@
 <?php
 include "partials/header.php";
+require 'database_conn.php';
+
+$sql_query = "SELECT * FROM tasks WHERE status='todo' ORDER BY id DESC";
+$res = mysqli_query($conn, $sql_query);
+
+
 ?>
 <div class="container">
   <header>
@@ -8,7 +14,7 @@ include "partials/header.php";
   <section class="task-display">
     <aside class="status to-do">
       <div class="flex-me">
-        <h3><span class="material-symbols-outlined"> list_alt </span>To Do</h3>
+        <h3><span class="material-symbols-outlined"> list_alt </span>To Do (<?php echo mysqli_num_rows($res) ?>)</h3>
         <a href="create.php"><button class="add-button">
             <span class="material-symbols-outlined" id="add">
               add_circle
@@ -16,12 +22,6 @@ include "partials/header.php";
           </button></a>
       </div>
       <hr />
-      <?php
-require 'database_conn.php';
-
-$sql_query = "SELECT * FROM tasks WHERE status='todo'";
-$res = mysqli_query($conn, $sql_query);
-?>
       <?php
 if (mysqli_num_rows($res) > 0) {
     while ($row = mysqli_fetch_assoc($res)) {?>
@@ -44,7 +44,7 @@ if (mysqli_num_rows($res) > 0) {
             <div class="task-space">
               <div class="description">
                 <?php
-$des = $row["description"];
+        $des = $row["description"];
         $len = strlen($des);
         if ($len > 50) {
             $des = substr($des, 0, 50) . "<b>...</b>";
@@ -70,17 +70,10 @@ $des = $row["description"];
                     <span class="material-symbols-outlined"> delete </span>
                   </button>
                 </a>
-                
-                <div id="deletePopup" style="display: none;">
-                <p>Are you sure you want to delete this item?</p>
-                <button onclick="deleteItem()">Yes</button>
-                <button onclick="closePopup()">No</button>
-              </div>
 
               </div>
             </div>
           </div>
-
         </div>
       </a>
 
@@ -90,9 +83,14 @@ $des = $row["description"];
 }?>
     </aside>
 
+    <?php
+    $query = "SELECT * FROM tasks WHERE status='done' ORDER BY id DESC";
+    $respond = mysqli_query($conn, $query);
+    ?>
+
     <aside class="status done">
       <div class="flex-me">
-        <h3><span class="material-symbols-outlined"> done </span>Done</h3>
+        <h3><span class="material-symbols-outlined"> done </span>Done (<?php echo mysqli_num_rows($respond) ?>)</h3>
         <a href=""><button class="hide">
             <span class="material-symbols-outlined" id="add">
               visibility_off
@@ -100,14 +98,11 @@ $des = $row["description"];
           </button></a>
       </div>
       <hr />
-      <?php
-$sql_query = "SELECT * FROM tasks WHERE status='done' ORDER BY id DESC";
-$res = mysqli_query($conn, $sql_query);
-?>
+
       <?php
 if (mysqli_num_rows($res) > 0) {
-    while ($row = mysqli_fetch_assoc($res)) {?>
-      <div class="task-card done-task">
+    while ($row = mysqli_fetch_assoc($respond)) {?>
+      <div class="task-card">
         <div class="image">
           <img src="images/<?php echo $row["image_link"] ?>" alt="task-image">
         </div>
@@ -125,7 +120,7 @@ if (mysqli_num_rows($res) > 0) {
           <div class="task-space">
             <div class="description"><s>
                 <?php
-$des = $row["description"];
+        $des = $row["description"];
         $len = strlen($des);
         if ($len > 50) {
             $des = substr($des, 0, 50) . "<b>...</b>";
@@ -144,11 +139,6 @@ $des = $row["description"];
                   <span class="material-symbols-outlined"> delete </span>
                 </button>
               </a>
-              <div id="deletePopup" style="display: none;">
-                <p>Are you sure you want to delete this item?</p>
-                <button onclick="deleteItem()">Yes</button>
-                <button onclick="closePopup()">No</button>
-              </div>
             </div>
           </div>
         </div>
