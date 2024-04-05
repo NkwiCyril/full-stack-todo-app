@@ -9,9 +9,6 @@ if (isset($_POST["add"])) {
         $description = $_POST["description"];
         $file = $_FILES["image-file"]["name"];
 
-        // each task at the point of creation is undone (todo)
-        $status = "todo";
-
         $target_dir = "images/";
         $target_file = $target_dir . basename($file);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -28,8 +25,8 @@ if (isset($_POST["add"])) {
             move_uploaded_file($_FILES["image-file"]["tmp_name"], $image_upload_path);
 
             // sql query to insert created task
-            $query = "INSERT INTO tasks (title, description, status,image_link)
-                      VALUES ('$title','$description','$status','$new_image_name')";
+            $query = "INSERT INTO tasks (title, description,image_link)
+                      VALUES ('$title', '$description', '$new_image_name')";
 
             // catch any unexpected errors
             try {
@@ -51,7 +48,8 @@ if (isset($_POST["add"])) {
   <div class="form">
     <h1>Add Task</h1>
     <form enctype="multipart/form-data" action="create.php" method="POST">
-      Upload image: <input name="image-file" type="file" required />
+      Upload image: <input name="image-file" type="file" accept=".png, .jpg, .jpeg" onchange="handleFileSelect(event)" required />
+			<div id="image-preview"></div>
       <label for="title">Title:</label>
       <input type="text" name="title" placeholder="Input task title" autocomplete="off" autofocus required/>
       <label for="title">Description:</label>
@@ -60,10 +58,18 @@ if (isset($_POST["add"])) {
     </form>
   </div>
 </section>
-
+<script>
+  function handleFileSelect(event) {
+    const file = event.target.files[0];
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const imagePreview = document.getElementById("image-preview");
+			imagePreview.innerHTML = `<img src="${e.target.result}" alt="Selected image" style="max-width: 100%; max-height: 100px;">`;	
+		};
+		reader.readAsDataURL(file);
+  }
+</script>
 
 <?php
-// !empty($_POST["image-file"]) &&
 include "partials/footer.php";
-
 ?>
