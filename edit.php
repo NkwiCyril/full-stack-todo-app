@@ -76,8 +76,9 @@ if (isset($_POST["edit"])) {
     <form enctype="multipart/form-data" action="edit.php?id=<?php echo $id ?>" method="POST">
       <div>
         <label for="image-file"><b>Upload Image:</b></label>
-        <input type="file" name="image-file" accept=".png, .jpg, .jpeg" />
+        <input type="file" name="image-file" accept=".png, .jpg, .jpeg" onchange="handleFileSelect(event)" />
       </div>
+      <div id="image-preview"></div>
       <label for="title"><b>Title:</b></label>
       <input type="text" name="title" value="<?php echo $title ?>" autocomplete="off" autofocus required/>
       <label for="description"><b>Description:</b></label>
@@ -86,6 +87,21 @@ if (isset($_POST["edit"])) {
     </form>
   </div>
 </section>
+
+<script>
+  function handleFileSelect(event) {
+    const file = event.target.files[0];
+    console.log(file);
+		const reader = new FileReader();
+		reader.onload = function(e) {
+			const imagePreview = document.getElementById("image-preview");
+            console.log(e.target.result);
+			imagePreview.innerHTML = `<img src="${e.target.result}" alt="Selected image" style="max-width: 100%; max-height: 100px;">`;	
+		};
+		reader.readAsDataURL(file);
+        console.log(reader);
+  }
+</script>
 
 <?php
 include "partials/footer.php";

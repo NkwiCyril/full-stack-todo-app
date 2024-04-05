@@ -58,6 +58,8 @@ if (isset($_POST["add"])) {
     </form>
   </div>
 </section>
+
+
 <script>
   function handleFileSelect(event) {
     const file = event.target.files[0];
