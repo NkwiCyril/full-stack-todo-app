@@ -51,7 +51,7 @@ if (isset($_POST["add"])) {
       Upload image: <input name="image-file" type="file" accept=".png, .jpg, .jpeg" onchange="handleFileSelect(event)" required />
 			<div id="image-preview"></div>
       <label for="title">Title:</label>
-      <input type="text" name="title" placeholder="Input task title" autocomplete="off" autofocus required/>
+      <input type="text" name="title" placeholder="Input task title" autocomplete="off" maxlength="50" autofocus required/>
       <label for="title">Description:</label>
       <textarea name="description" id="description" cols="30" rows="5" placeholder="Input task description" required ></textarea>
       <input type="submit" value="Add Task" class="btn" name="add" >

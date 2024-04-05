@@ -5,8 +5,8 @@ require 'database_conn.php';
 $sql_query = "SELECT * FROM tasks WHERE done_time is null ORDER BY id DESC";
 $res = mysqli_query($conn, $sql_query);
 
-
 ?>
+
 <div class="container">
   <header>
 
@@ -65,11 +65,9 @@ if (mysqli_num_rows($res) > 0) {
                   </button>
                 </a>
 
-                <a href="delete.php?id=<?php echo $row["id"] ?>">
-                  <button class="delete-button" title="Delete task">
+                  <button class="delete-button" title="Delete task" id="<?php echo $row["id"] ?>" >
                     <span class="material-symbols-outlined"> delete </span>
                   </button>
-                </a>
 
               </div>
             </div>
@@ -134,11 +132,11 @@ if (mysqli_num_rows($respond) > 0) {
           <div class="btns-datetime">
             <p class="datetime">Completed on <?php echo $task["done_time"] ?></p>
             <div class="buttons">
-              <a href="delete.php?id=<?php echo $task["id"] ?>">
-                <button class="delete-button" title="Delete task">
+
+                <button class="delete-button" id="<?php echo $task["id"] ?>" title="Delete task">
                   <span class="material-symbols-outlined"> delete </span>
                 </button>
-              </a>
+
             </div>
           </div>
         </div>
@@ -150,6 +148,8 @@ if (mysqli_num_rows($respond) > 0) {
     </aside>
   </section>
 </div>
+
+<script src="script.js"></script>
 
 <?php
 include "partials/footer.php";

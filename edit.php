@@ -80,10 +80,10 @@ if (isset($_POST["edit"])) {
       </div>
       <div id="image-preview"></div>
       <label for="title"><b>Title:</b></label>
-      <input type="text" name="title" value="<?php echo $title ?>" autocomplete="off" autofocus required/>
+      <input type="text" name="title" value="<?php echo $title ?>" autocomplete="off" maxlength="50" autofocus required/>
       <label for="description"><b>Description:</b></label>
       <textarea name="description" id="description" cols="30" rows="5" required><?php echo $description ?></textarea>
-      <input type="submit" value="Update" class="btn" name="edit">
+      <input type="submit" value="Update" class="btn" name="edit"  >
     </form>
   </div>
 </section>
