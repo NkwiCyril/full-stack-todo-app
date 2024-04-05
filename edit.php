@@ -2,18 +2,16 @@
 include "partials/header.php";
 require "database_conn.php";
 
-// Initialize variables
 $title = $description = $status = "";
 
-if(isset($_GET["id"])) {
+if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
     // Fetch task details from database
     $query = "SELECT * FROM tasks WHERE id=$id";
     $result = mysqli_query($conn, $query);
-
     // Check if task exists
-    if(mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) > 0) {
         $task = mysqli_fetch_assoc($result);
         $title = $task["title"];
         $description = $task["description"];
@@ -25,12 +23,13 @@ if(isset($_GET["id"])) {
 
 if (isset($_POST["edit"])) {
     // Check if title and description are provided
-    if(!empty($_POST["title"]) && !empty($_POST["description"])) {
+    if (!empty($_POST["title"]) && !empty($_POST["description"])) {
+			
         $title = $_POST["title"];
         $description = $_POST["description"];
 
         // Check if image file is uploaded
-        if(!empty($_FILES["image-file"]["name"])) {
+        if (!empty($_FILES["image-file"]["name"])) {
             $file = $_FILES["image-file"]["name"];
             $target_dir = "images/";
             $target_file = $target_dir . basename($file);
@@ -39,11 +38,11 @@ if (isset($_POST["edit"])) {
             $image_upload_path = $target_dir . $new_image_name;
 
             // Check file format
-            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
+            if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg") {
                 echo "<b>Only JPG, JPEG and PNG files are allowed.</b>";
             } else {
                 // Upload image file
-                if(move_uploaded_file($_FILES["image-file"]["tmp_name"], $image_upload_path)) {
+                if (move_uploaded_file($_FILES["image-file"]["tmp_name"], $image_upload_path)) {
                     // Update task with new image
                     $query = "UPDATE tasks SET title='$title', description='$description', image_link='$new_image_name' WHERE id=$id";
                 } else {
@@ -56,7 +55,7 @@ if (isset($_POST["edit"])) {
         }
 
         // Execute query to update task
-        if(mysqli_query($conn, $query)) {
+        if (mysqli_query($conn, $query)) {
             header("Location: index.php");
             exit();
         } else {
@@ -77,7 +76,7 @@ if (isset($_POST["edit"])) {
     <form enctype="multipart/form-data" action="edit.php?id=<?php echo $id ?>" method="POST">
       <div>
         <label for="image-file"><b>Upload Image:</b></label>
-        <input type="file" name="image-file" />
+        <input type="file" name="image-file" accept=".png, .jpg, .jpeg" />
       </div>
       <label for="title"><b>Title:</b></label>
       <input type="text" name="title" value="<?php echo $title ?>" autocomplete="off" autofocus required/>

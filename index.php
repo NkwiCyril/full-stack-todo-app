@@ -2,7 +2,7 @@
 include "partials/header.php";
 require 'database_conn.php';
 
-$sql_query = "SELECT * FROM tasks WHERE status='todo' ORDER BY id DESC";
+$sql_query = "SELECT * FROM tasks WHERE done_time is null ORDER BY id DESC";
 $res = mysqli_query($conn, $sql_query);
 
 
@@ -25,7 +25,7 @@ $res = mysqli_query($conn, $sql_query);
       <?php
 if (mysqli_num_rows($res) > 0) {
     while ($row = mysqli_fetch_assoc($res)) {?>
-      <a href="view.php?id=<?php echo $row["id"] ?>" class="view-card">
+      <a href="view.php?id=<?php echo $row["id"] ?>" class="view-card" >
         <div class="task-card gray">
           <div class="image">
             <img src="images/<?php echo $row["image_link"] ?>" alt="task-image">
@@ -79,38 +79,38 @@ if (mysqli_num_rows($res) > 0) {
 
       <?php }
 } else {
-    echo "<em>All tasks  to be done will display here.</em>";
+    echo "<em>All tasks to be done will display here.</em>";
 }?>
     </aside>
 
     <?php
-    $query = "SELECT * FROM tasks WHERE status='done' ORDER BY id DESC";
+    $query = "SELECT * FROM tasks WHERE done_time is not null ORDER BY id DESC";
     $respond = mysqli_query($conn, $query);
     ?>
 
     <aside class="status done">
       <div class="flex-me">
         <h3><span class="material-symbols-outlined"> done </span>Done (<?php echo mysqli_num_rows($respond) ?>)</h3>
-        <a href=""><button class="hide">
+        <button class="hide">
             <span class="material-symbols-outlined" id="add">
               visibility_off
             </span>
-          </button></a>
+          </button>
       </div>
       <hr />
 
       <?php
-if (mysqli_num_rows($res) > 0) {
-    while ($row = mysqli_fetch_assoc($respond)) {?>
-      <div class="task-card">
+if (mysqli_num_rows($respond) > 0) {
+    while ($task = mysqli_fetch_assoc($respond)) {?>
+      <div class="task-card" id="complete" >
         <div class="image">
-          <img src="images/<?php echo $row["image_link"] ?>" alt="task-image">
+          <img src="images/<?php echo $task["image_link"] ?>" alt="task-image">
         </div>
         <div class="task-content">
           <div class="status-buttons">
-            <h1 class="task-title"><s><?php echo $row["title"] ?></s></h1>
+            <h1 class="task-title"><s><?php echo $task["title"] ?></s></h1>
 
-            <a href="revert.php?id=<?php echo $row["id"] ?>">
+            <a href="revert.php?id=<?php echo $task["id"] ?>">
               <button class="add-button" title="revert">
                 <span class="material-symbols-outlined done-btn"> change_circle </span>
               </button>
@@ -120,7 +120,7 @@ if (mysqli_num_rows($res) > 0) {
           <div class="task-space">
             <div class="description"><s>
                 <?php
-        $des = $row["description"];
+        $des = $task["description"];
         $len = strlen($des);
         if ($len > 50) {
             $des = substr($des, 0, 50) . "<b>...</b>";
@@ -132,9 +132,9 @@ if (mysqli_num_rows($res) > 0) {
               </s></div>
           </div>
           <div class="btns-datetime">
-            <p class="datetime">Completed on <?php echo $row["done_time"] ?></p>
+            <p class="datetime">Completed on <?php echo $task["done_time"] ?></p>
             <div class="buttons">
-              <a href="delete.php?id=<?php echo $row["id"] ?>">
+              <a href="delete.php?id=<?php echo $task["id"] ?>">
                 <button class="delete-button" title="Delete task">
                   <span class="material-symbols-outlined"> delete </span>
                 </button>
@@ -152,7 +152,5 @@ if (mysqli_num_rows($res) > 0) {
 </div>
 
 <?php
-
 include "partials/footer.php";
-
 ?>

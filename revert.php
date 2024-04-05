@@ -6,7 +6,7 @@ require 'database_conn.php';
 
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
-    $sql_query = "UPDATE tasks SET status='todo' WHERE id=$id";
+    $sql_query = "UPDATE tasks SET done_time=NULL WHERE id=$id";
 
     try {
         $response = mysqli_query($conn, $sql_query);
