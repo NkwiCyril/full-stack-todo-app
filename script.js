@@ -3,10 +3,14 @@ $(document).ready(function () {
 
   $(".delete-button").on("click", function () {
     $(".alert").css("display", "flex");
+    $("body").css("backdrop-filter", "brightness(50%)");
+    $(".container").css("filter", "brightness(50%)");
   });
 
   $("#cancel").click(function () {
     $(".alert").css("display", "none");
+    $("body").css("backdrop-filter", "none");
+    $(".container").css("filter", "none");
   });
 
   $("#delete").click(function () {
@@ -24,5 +28,9 @@ $(document).ready(function () {
         }
       }
     );
+    $("body").css("backdrop-filter", "none");
+    $(".container").css("filter", "none");
   });
 });
+
+ 

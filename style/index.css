@@ -362,6 +362,7 @@ a.view-card:hover {
   width: 100%;
   display: flex;
   justify-content: center;
+  z-index: 2;
 }
 
 .alert-container{
