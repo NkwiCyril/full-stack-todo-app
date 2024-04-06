@@ -7,6 +7,17 @@ $res = mysqli_query($conn, $sql_query);
 
 ?>
 
+<div class="alert" style="display: none;">
+  <div class="alert-container">
+    <p>Are you sure you want to delete this task?</p>
+    <div class="btns">
+      <button id="cancel">Cancel</button>
+      <button id="delete">Delete</button>
+    </div>
+  </div>
+</div>
+
+
 <div class="container">
   <header>
 
@@ -82,9 +93,9 @@ if (mysqli_num_rows($res) > 0) {
     </aside>
 
     <?php
-    $query = "SELECT * FROM tasks WHERE done_time is not null ORDER BY id DESC";
-    $respond = mysqli_query($conn, $query);
-    ?>
+$query = "SELECT * FROM tasks WHERE done_time is not null ORDER BY id DESC";
+$respond = mysqli_query($conn, $query);
+?>
 
     <aside class="status done">
       <div class="flex-me">
@@ -148,8 +159,6 @@ if (mysqli_num_rows($respond) > 0) {
     </aside>
   </section>
 </div>
-
-<script src="script.js"></script>
 
 <?php
 include "partials/footer.php";

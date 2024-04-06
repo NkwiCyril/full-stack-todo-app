@@ -353,3 +353,50 @@ a.view-card:hover {
   color: #464440;
 }
 
+/* ================================== */
+/*              alert.php             */
+/* ================================== */
+
+.alert {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.alert-container{
+  width: fit-content;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  margin-top: 10rem;
+}
+
+.alert-container p {
+  margin-bottom: 1rem;
+}
+
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+#cancel, #delete {
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#delete {
+  background-color:#f43f5e;
+  color: white;
+}
+
+#delete:hover {
+  background-color: #f42447;
+}
