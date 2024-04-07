@@ -21,16 +21,15 @@ if (isset($_POST["add"])) {
             $new_image_name = uniqid("IMG-", true) . "." . $imageFileType;
             // path the image is to be uploaded to
             $image_upload_path = $target_dir . $new_image_name;
-            // upload file
-            move_uploaded_file($_FILES["image-file"]["tmp_name"], $image_upload_path);
 
             // sql query to insert created task
-            $query = "INSERT INTO tasks (title, description,image_link)
-                      VALUES ('$title', '$description', '$new_image_name')";
+            $query = "INSERT INTO tasks (title, description,image_link) VALUES ('$title', '$description', '$new_image_name')";
 
             // catch any unexpected errors
             try {
                 mysqli_query($conn, $query);
+                // upload file
+                move_uploaded_file($_FILES["image-file"]["tmp_name"], $image_upload_path);  
                 header("Location: index.php");
             } catch (mysqli_sql_exception $e) {
                 echo "Unable to add task: " . $e->getMessage();
