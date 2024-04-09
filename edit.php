@@ -15,6 +15,7 @@ if (isset($_GET["id"])) {
         $task = mysqli_fetch_assoc($result);
         $title = $task["title"];
         $description = $task["description"];
+        $imageLink = $task["image_link"];
     } else {
         echo "Task not found.";
         exit();
@@ -72,13 +73,14 @@ if (isset($_POST["edit"])) {
 <section class="container">
   <div class="form">
     <h1>Update Task</h1>
-    <h4><?php if (!empty($task["image_link"])) {echo "(Previous image is already set. You can set a new one)";} else {echo "Set new image";}?></h4>
     <form enctype="multipart/form-data" action="edit.php?id=<?php echo $id ?>" method="POST">
       <div>
         <label for="image-file"><b>Upload Image:</b></label>
         <input type="file" name="image-file" accept=".png, .jpg, .jpeg" onchange="handleFileSelect(event)" />
       </div>
-      <div id="image-preview"></div>
+      <div id="image-preview">
+        <img src="images/<?php echo $imageLink ?>" alt="Selected image" style="max-width: 100%; max-height: 100px;">
+      </div>
       <label for="title"><b>Title:</b></label>
       <input type="text" name="title" value="<?php echo $title ?>" autocomplete="off" maxlength="50" autofocus required/>
       <label for="description"><b>Description:</b></label>
@@ -91,15 +93,13 @@ if (isset($_POST["edit"])) {
 <script>
   function handleFileSelect(event) {
     const file = event.target.files[0];
-    console.log(file);
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			const imagePreview = document.getElementById("image-preview");
-            console.log(e.target.result);
-			imagePreview.innerHTML = `<img src="${e.target.result}" alt="Selected image" style="max-width: 100%; max-height: 100px;">`;	
-		};
-		reader.readAsDataURL(file);
-        console.log(reader);
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imagePreview = document.getElementById("image-preview");
+      console.log(e.target.result);
+      imagePreview.innerHTML = `<img src="${e.target.result}" alt="Selected image" style="max-width: 100%; max-height: 100px;">`;
+    };
+    reader.readAsDataURL(file);
   }
 </script>
 

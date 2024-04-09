@@ -24,7 +24,7 @@ $(document).ready(function () {
         if (response) {
           window.location.replace("index.php");
         } else {
-          alert("Unable to delete task at the moment!");
+          alert("Unable to delete task at the moment! Try again later");
         }
       }
     );
