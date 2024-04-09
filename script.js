@@ -28,7 +28,7 @@ $(document).ready(function () {
         }
       }
     );
-    $("body").css("backdrop-filter", "none");
+    $("body|").css("backdrop-filter", "none");
     $(".container").css("filter", "none");
   });
 });

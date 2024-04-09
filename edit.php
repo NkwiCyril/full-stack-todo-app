@@ -69,6 +69,18 @@ if (isset($_POST["edit"])) {
 
 ?>
 
+<style>
+
+  .max-words {
+    display: flex;
+    justify-content: right;
+  }
+  .max-words p {
+    font-size: 15px;
+    color: black;
+  }
+</style>
+
 <!-- Form display -->
 <section class="container">
   <div class="form">
@@ -83,8 +95,14 @@ if (isset($_POST["edit"])) {
       </div>
       <label for="title"><b>Title:</b></label>
       <input type="text" name="title" value="<?php echo $title ?>" autocomplete="off" maxlength="50" autofocus required/>
+		<div class="max-words">
+        <p><span>0</span>/50</p>
+      </div>
       <label for="description"><b>Description:</b></label>
       <textarea name="description" id="description" cols="30" rows="5" required><?php echo $description ?></textarea>
+		<div class="max-words">
+        <p><span>0</span>/50</p>
+      </div>
       <input type="submit" value="Update" class="btn" name="edit"  >
     </form>
   </div>

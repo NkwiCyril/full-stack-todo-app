@@ -42,17 +42,36 @@ if (isset($_POST["add"])) {
 }
 ?>
 
+<style>
+
+  .max-words {
+    display: flex;
+    justify-content: right;
+  }
+  .max-words p {
+    font-size: 15px;
+    color: black;
+  }
+</style>
+
 
 <section class="container">
   <div class="form">
     <h1>Add Task</h1>
     <form enctype="multipart/form-data" action="create.php" method="POST">
-      Upload image: <input name="image-file" type="file" accept=".png, .jpg, .jpeg" onchange="handleFileSelect(event)" required />
+      <label for="image">Upload image: </label>
+      <input name="image-file" type="file" accept=".png, .jpg, .jpeg" onchange="handleFileSelect(event)" required />
 			<div id="image-preview"></div>
       <label for="title">Title:</label>
-      <input type="text" name="title" placeholder="Input task title" autocomplete="off" maxlength="50" autofocus required/>
+      <input id="title" type="text" name="title" placeholder="Input task title" autocomplete="off" maxlength="50" autofocus required/>
+      <div class="max-words">
+        <p><span class="words-entered" >0</span>/50</p>
+      </div>
       <label for="title">Description:</label>
       <textarea name="description" id="description" cols="30" rows="5" placeholder="Input task description" required ></textarea>
+      <div class="max-words">
+        <p><span class="words-entered-des" >0</span>/1500</p>
+      </div>
       <input type="submit" value="Add Task" class="btn" name="add" >
     </form>
   </div>
@@ -62,13 +81,43 @@ if (isset($_POST["add"])) {
 <script>
   function handleFileSelect(event) {
     const file = event.target.files[0];
-		const reader = new FileReader();
-		reader.onload = function(e) {
-			const imagePreview = document.getElementById("image-preview");
-			imagePreview.innerHTML = `<img src="${e.target.result}" alt="Selected image" style="max-width: 100%; max-height: 100px;">`;	
-		};
-		reader.readAsDataURL(file);
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const imagePreview = document.getElementById("image-preview");
+      imagePreview.innerHTML = `<img src="${e.target.result}" alt="Selected image" style="max-width: 100%; max-height: 100px;">`;
+    };
+    reader.readAsDataURL(file);
   }
+
+  var numberOfWordsTitle = 0;
+  var wordsEntered = $(".words-entered");
+  var numberOfWords = 0;
+  var wordsEnteredDes = $(".words-entered-des")
+
+  $("#title").keydown(function(event) {
+    if(event.key != "Backspace" || event.key != "Delete")
+     {
+      numberOfWordsTitle++;
+      wordsEntered.html(numberOfWordsTitle);
+    }
+    if (event.key == "Backspace") {
+      numberOfWordsTitle--;
+      wordsEntered.html(numberOfWordsTitle)
+    }
+  });
+
+  $("#description").keydown(function(event) {
+    if(event.key != "Backspace" || event.key != "Delete")
+     {
+      numberOfWords++;
+      wordsEnteredDes.html(numberOfWords);
+    }
+    if (event.key == "Backspace") {
+      numberOfWords--;
+      wordsEnteredDes.html(numberOfWords)
+    }
+  });
+
 </script>
 
 <?php
