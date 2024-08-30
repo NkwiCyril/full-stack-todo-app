@@ -101,9 +101,6 @@ $respond = mysqli_query($conn, $query);
       <div class="flex-me">
         <h3><span class="material-symbols-outlined"> done </span>Done (<?php echo mysqli_num_rows($respond) ?>)</h3>
         <button class="hide">
-            <span class="material-symbols-outlined" id="add">
-              visibility_off
-            </span>
           </button>
       </div>
       <hr />
